@@ -322,9 +322,9 @@
 
             // プロンプトを生成して結果領域に表示
             setTimeout(() => {
-                const prompt = `以下の文字起こしデータと動画時間を元に、YouTube用のタイムスタンプと各セクションの要約を作成してください。\n\n【指示】\n1. 0:00の「始まり」からスタートすること。\n2. 話のトピックが変わるタイミングを見つけてタイムスタンプを作成し、その内容を要約すること。\n3. 最後に「終わり」のタイムスタンプを作成すること。\n\n【動画時間】\n${duration || "不明"}\n\n【文字起こしデータ】\n${transcript}`;
+                const prompt = `以下の文字起こしデータから、以下の条件で内容を作成してください。\n\n【指示】\n・タイムスタンプを作成する\n・タイムスタンプは「1分12秒」のような表記は避け、「23:23」や「01:12」のようにYouTubeの概要欄でリンクになる形式（mm:ss）で記載すること\n・各パートの要約を作成する\n・クリックされやすいタイトルを考える\n・全体を5〜8個くらいに分けること\n・初心者にもわかるタイトルにすること\n・YouTube概要欄にそのまま貼れる形式にすること\n\n【動画時間】\n${duration || "不明"}\n\n【文字起こしデータ】\n${transcript}`;
                 
-                resultBox.innerHTML = `<em>※このツールは現在UIのデモ版です。<br>以下のプロンプトをコピーしてChatGPTやGemini等に貼り付けると、AIがタイムスタンプを生成してくれます。</em><br><br><hr><br>${prompt.replace(/\\n/g, '<br>')}`;
+                resultBox.innerHTML = `<em>※以下のプロンプトをコピーしてChatGPTやGemini等に貼り付けると、指定の条件でタイムスタンプと概要欄テキストを生成してくれます。</em><br><br><hr><br>${prompt.replace(/\n/g, '<br>')}`;
                 
                 generateBtn.innerHTML = originalText;
                 generateBtn.disabled = false;
